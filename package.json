@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://Cauan33XL.github.io/yaldabaoth-email-project",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
