@@ -16,10 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # Do not persist the automatic GITHUB_TOKEN to the checked-out repository
-          # when the deploy action creates a commit; peaceiris/action will use the
-          # provided token to push to gh-pages. Keep default behavior for other steps.
-          persist-credentials: false
+          # Allow the action to use the automatically provided GITHUB_TOKEN
+          # to push commits created by the deploy action.
+          persist-credentials: true
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -35,6 +34,17 @@ jobs:
 
       - name: Build
         run: npm run build --if-present
+
+      - name: Verify build output
+        run: |
+          echo "Listing workspace files for debugging"
+          ls -la
+          echo "Checking dist directory"
+          if [ -d "./dist" ]; then
+            echo "dist exists. Contents:" && ls -la ./dist || true
+          else
+            echo "ERROR: build didn't produce ./dist. Failing early with logs above." && exit 1
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
