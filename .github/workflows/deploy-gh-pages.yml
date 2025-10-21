@@ -8,9 +8,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Do not persist the automatic GITHUB_TOKEN to the checked-out repository
+          # when the deploy action creates a commit; peaceiris/action will use the
+          # provided token to push to gh-pages. Keep default behavior for other steps.
+          persist-credentials: false
 
       - name: Setup Node
         uses: actions/setup-node@v4
