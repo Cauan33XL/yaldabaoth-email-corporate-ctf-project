@@ -12,7 +12,7 @@ export function BrandedLogin({ onLogin }: { onLogin?: (email: string) => void })
       throw new Error('Senha incorreta')
     }
 
-    // Simular delay de autenticação
+    // Simular delay de autenticação de alguns segundos
     await new Promise(resolve => setTimeout(resolve, 2000))
     
     // Chamar callback de login bem-sucedido
