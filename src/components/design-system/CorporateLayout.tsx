@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { ThemeToggle } from '../ui/theme-toggle'
 
 interface CorporateLayoutProps {
   children: ReactNode
@@ -6,6 +7,7 @@ interface CorporateLayoutProps {
   background?: 'default' | 'branded' | 'minimal'
   showFooter?: boolean
   companyName?: string
+  showThemeToggle?: boolean
 }
 
 export function CorporateLayout({ 
@@ -14,6 +16,7 @@ export function CorporateLayout({
   background = 'default',
   showFooter = true,
   companyName = "Yaldabaoth Ficticious Bank"
+  , showThemeToggle = false
 }: CorporateLayoutProps) {
   const maxWidthClasses = {
     sm: 'max-w-sm',
@@ -23,9 +26,9 @@ export function CorporateLayout({
   }
 
   const backgroundClasses = {
-    default: 'bg-gradient-to-br from-slate-50 via-white to-slate-100',
-    branded: 'bg-gradient-to-br from-green-50 via-white to-green-50',
-    minimal: 'bg-white'
+    default: 'bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900',
+    branded: 'bg-gradient-to-br from-green-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900',
+    minimal: 'bg-white dark:bg-gray-900'
   }
 
   return (
@@ -51,6 +54,11 @@ export function CorporateLayout({
                 Suporte
               </a>
             </div>
+            {showThemeToggle && (
+              <div className="mt-4 flex justify-center">
+                <ThemeToggle className="px-3 py-1 text-sm" />
+              </div>
+            )}
           </div>
         )}
       </div>

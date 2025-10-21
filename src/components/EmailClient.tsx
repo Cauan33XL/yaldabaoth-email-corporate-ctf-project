@@ -292,7 +292,13 @@ export function EmailClient({ userEmail, onLogout }: EmailClientProps) {
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null)
   const [inboxEmails, setInboxEmails] = useState(() => createMockInboxEmails(userName))
   const [sentEmails, _setSentEmails] = useState(() => createMockSentEmails(userEmail, userName))
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    try {
+      return localStorage.getItem('theme') === 'dark'
+    } catch {
+      return false
+    }
+  })
   const [selectedFolder, setSelectedFolder] = useState('inbox')
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [aiAnalysisText, setAiAnalysisText] = useState('')
@@ -306,6 +312,11 @@ export function EmailClient({ userEmail, onLogout }: EmailClientProps) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
+    }
+    try {
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
+    } catch {
+      // ignore
     }
   }, [isDarkMode])
 

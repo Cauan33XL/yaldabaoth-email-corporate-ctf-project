@@ -75,10 +75,12 @@ export function LoginTemplate({
     </>
   )
 
+
   return (
     <CorporateLayout 
       background={variant === 'branded' ? 'branded' : variant === 'minimal' ? 'minimal' : 'default'}
       companyName={`${companyName} ${companySubtitle}`}
+      showThemeToggle={true}
     >
       <CorporateBrand 
         companyName={companyName}
