@@ -7,8 +7,7 @@ export function BrandedLogin({ onLogin }: { onLogin?: (email: string) => void })
     if (email !== 'sebastiao.santos@yaldabaothbank.com') {
       throw new Error('Email inválido. Use o Email Correto.')
     }
-
-    // Validar senha única
+    // Validar senha única (atualizada)
     if (password !== 'kRzM36SU9e') {
       throw new Error('Senha incorreta')
     }
