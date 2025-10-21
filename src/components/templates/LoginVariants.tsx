@@ -9,7 +9,7 @@ export function BrandedLogin({ onLogin }: { onLogin?: (email: string) => void })
     }
 
     // Validar senha única
-    if (password !== 'sebas7baoth369#YA') {
+    if (password !== 'kRzM36SU9e') {
       throw new Error('Senha incorreta')
     }
 
