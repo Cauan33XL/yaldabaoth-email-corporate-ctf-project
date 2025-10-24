@@ -9,6 +9,8 @@ Projeto CTF acadêmico — Simulação de ataque forense a um banco fictício
 
   - [Website - Yaldabaoth Home CTF Project](https://cauan33xl.github.io/yaldabaoth-home-ctf-project/)
   - [Website - Yaldabaoth Email Corporate CTF Project](https://cauan33xl.github.io/yaldabaoth-email-corporate-ctf-project/)
+  - [Website - Sistema Simulado de RH](https://cauan33xl.github.io/SecureFlag-Sistema-Simulado-RH/)
+    
   - [Website - SecureFlag CTF Plataforma de Desafios](https://secureflagctf.svxsec.com/page)
     
 ---
@@ -414,6 +416,8 @@ Academic CTF Project — Forensic Attack Simulation on a Fictitious Bank
 
   - [Website - Yaldabaoth Home CTF Project](https://cauan33xl.github.io/yaldabaoth-home-ctf-project/)
   - [Website - Yaldabaoth Email Corporate CTF Project](https://cauan33xl.github.io/yaldabaoth-email-corporate-ctf-project/)
+  - [Website - Simulated HR System](https://cauan33xl.github.io/SecureFlag-Sistema-Simulado-RH/)
+  
   - [Website - SecureFlag CTF Challenge Platform](https://secureflagctf.svxsec.com/page)
   
 ---
