@@ -32,126 +32,137 @@ interface Email {
   isSuspicious?: boolean
 }
 
+
+
+
+
 // Função para criar emails da caixa de entrada (9 totais, completos)
 const createMockInboxEmails = (userName: string): Email[] => [
   {
     id: '1',
-    from: 'kayori.ayumi@yaldabaothbank.com',
+    from: 'kayori.ayumi@corp.example.com',
     fromName: 'Kayori Ayumi',
-    subject: 'SecureFlag{ProtejaSuasSenhas!}',
-    preview: `Olá ${userName}, Esta é uma atualização de rotina sobre o projeto de segurança...`,
+    subject: 'Atualização: Políticas de Segurança de Senhas',
+    preview: `Olá ${userName}, Atualização de rotina sobre as políticas de segurança...`,
     time: 'há cerca de 1 hora',
-    isRead: false,
+    isRead: true,
     hasAttachment: false,
-    priority: 'high',
-    fullContent: `Olá ${userName},\n\nEsta é uma atualização de rotina sobre o projeto de segurança. Precisamos revisar as políticas de senha e implementar novas medidas de proteção.\n\nPor favor, revise o documento anexo e me informe suas considerações.\n\nAtenciosamente,\nKayori Ayumi\nEquipe de Segurança da Informação`,
-    isSuspicious: true
+    priority: 'normal',
+    fullContent: `Olá ${userName},\n\nEsta é uma atualização de rotina sobre as políticas de segurança de senhas e controles de acesso. As mudanças propostas estão descritas no portal interno de segurança. Para revisar, acesse: https://intranet.corp.example.com/security/policies e consulte a seção "Políticas de Senha".\n\nPor favor, registre suas observações no formulário de feedback do portal.\n\nAtenciosamente,\nKayori Ayumi\nEquipe de Segurança da Informação`,
+    isSuspicious: false
   },
   {
     id: '2',
-    from: 'lucas.rocha@yaldabaothbank.com',
+    from: 'lucas.rocha@corp.example.com',
     fromName: 'Lucas Rocha',
-    subject: 'Atualização sobre o projeto 1',
-    preview: `Prezado ${userName}, Segue o relatório de progresso do projeto 1...`,
+    subject: 'Relatório de progresso — Projeto 1',
+    preview: `Prezado ${userName}, Segue resumo do progresso do Projeto 1...`,
     time: 'há cerca de 2 horas',
-    isRead: false,
-    hasAttachment: true,
+    isRead: true,
+    hasAttachment: false,
     priority: 'normal',
-    fullContent: `Prezado ${userName},\n\nSegue o relatório de progresso do projeto 1. Todas as metas foram atingidas conforme planejado e estamos dentro do cronograma estabelecido.\n\nDestaques desta semana:\n- Conclusão da fase de análise\n- Início dos testes de sistema\n- Aprovação do orçamento adicional\n\nPróximos passos serão discutidos na reunião de segunda-feira.\n\nCordialmente,\nLucas Rocha`,
+    fullContent: `Prezado ${userName},\n\nSegue o relatório de progresso do Projeto 1 no portal de projetos. Todas as metas previstas para o período foram registradas na seção de entregáveis.\n\nDestaques desta semana:\n- Conclusão da fase de análise\n- Início dos testes de integração\n- Ajustes no cronograma conforme priorização\n\nPróximos passos serão discutidos na reunião de segunda-feira (ver calendário corporativo).\n\nCordialmente,\nLucas Rocha`,
     isSuspicious: false
   },
   {
     id: '3',
-    from: 'seguranca.urgente@yaldabaothbank.com',
-    fromName: 'Segurança Urgente',
-    subject: 'URGENTE: Sua conta será suspensa em 24h',
-    preview: 'Detectamos atividade suspeita em sua conta. Clique aqui imediatamente...',
+    from: 'seguranca@corp.example.com',
+    fromName: 'Equipe de Segurança',
+    subject: 'Notificação: Verificação de manutenção programada',
+    preview: 'Informação sobre manutenção programada e verificação de atividade na conta...',
     time: 'há cerca de 3 horas',
-    isRead: false,
+    isRead: true,
     hasAttachment: false,
     priority: 'normal',
-    fullContent: `ATENÇÃO ${userName}!\n\nDetectamos atividade suspeita em sua conta bancária. Sua conta será SUSPENSA em 24 horas se não tomarmos ação imediata.\n\nClique no link abaixo AGORA para verificar sua identidade:\nhttps://yaldabaoth-verification-fake.com/urgent\n\nSe você não agir dentro de 24 horas, sua conta será permanentemente bloqueada.\n\nEquipe de Segurança Yaldabaoth Bank\n(Este é um email automatizado, não responda)`,
-    isSuspicious: true
+    fullContent: `Olá ${userName},\n\nInformamos que haverá uma verificação de manutenção programada nos sistemas de conta. Caso seja necessário, pediremos que confirme sua identidade por meio do portal seguro da empresa. Não solicitaremos senhas por e-mail nem enlaces externos.\n\nSe tiver dúvidas, abra um chamado via central de serviços (Service Desk) ou contate a equipe de segurança pelo ramal interno.\n\nAtenciosamente,\nEquipe de Segurança — Corp`,
+    isSuspicious: false
   },
   {
     id: '4',
-    from: 'francisco.neto@yaldabaothbank.com',
+    from: 'francisco.neto@corp.example.com',
     fromName: 'Francisco Neto',
-    subject: 'Relatório financeiro mensal',
-    preview: `Caro ${userName}, Anexo o relatório de finanças do mês...`,
+    subject: 'Relatório financeiro mensal disponível',
+    preview: `Caro ${userName}, O relatório financeiro mensal está disponível no portal...`,
     time: 'há 4 horas',
     isRead: true,
-    hasAttachment: true,
+    hasAttachment: false,
     priority: 'normal',
-    fullContent: `Caro ${userName},\n\nAnexo o relatório financeiro mensal. Por favor, revise e retorne com comentários antes da reunião de amanhã.\n\nResumo:\n- Receitas: +15%\n- Despesas: Controladas\n- Projeções: Positivas\n\nAtenciosamente,\nFrancisco Neto\nFinanceiro`,
+    fullContent: `Caro ${userName},\n\nO relatório financeiro mensal foi publicado no portal financeiro interno. Por favor, acesse a pasta "Relatórios Mensais" e revise os dados antes da reunião programada.\n\nResumo executivo disponível na primeira página do relatório no portal.\n\nAtenciosamente,\nFrancisco Neto\nFinanceiro`,
     isSuspicious: false
   },
   {
     id: '5',
-    from: 'paulo.almeida@yaldabaothbank.com',
+    from: 'paulo.almeida@corp.example.com',
     fromName: 'Paulo Almeida',
-    subject: 'Reunião de equipe - Agenda atualizada',
+    subject: 'Reunião de equipe — Agenda atualizada',
     preview: `Olá ${userName}, Atualizei a agenda para a reunião de equipe...`,
     time: 'há 5 horas',
-    isRead: false,
+    isRead: true,
     hasAttachment: false,
-    priority: 'low',
-    fullContent: `Olá ${userName},\n\nAtualizei a agenda para a reunião de equipe de amanhã. Novos itens:\n1. Discussão de metas Q4\n2. Apresentação de novos hires\n3. Feedback do cliente principal\n\nLink Zoom: https://zoom.us/j/123456789\n\nAbraços,\nPaulo Almeida\nRH`,
+    priority: 'normal',
+    fullContent: `Olá ${userName},\n\nAtualizei a agenda para a reunião de equipe de amanhã. Novos itens:\n1. Discussão de metas Q4\n2. Apresentação de novos colaboradores\n3. Feedback do cliente principal\n\nA reunião está agendada no calendário corporativo; o link de participação está disponível no evento.\n\nAbraços,\nPaulo Almeida\nRH`,
     isSuspicious: false
   },
   {
     id: '6',
-    from: 'clara.florence@yaldabaothbank.com',
+    from: 'clara.florence@corp.example.com',
     fromName: 'Clara Florence',
-    subject: 'Proposta de parceria externa',
+    subject: 'Proposta de parceria — Solicitação de reunião',
     preview: `Prezado ${userName}, Gostaria de discutir uma proposta de parceria...`,
     time: 'há 1 dia',
     isRead: true,
-    hasAttachment: true,
-    priority: 'high',
-    fullContent: `Prezado ${userName},\n\nGostaria de discutir uma proposta de parceria com a empresa XYZ. Anexo o documento com detalhes.\n\nPontos chave:\n- Investimento inicial: R$500k\n- Retorno esperado: 20% anual\n- Riscos: Baixos\n\nMarque uma call?\n\nCordialmente,\nClara Florence\nParcerias`,
+    hasAttachment: false,
+    priority: 'normal',
+    fullContent: `Prezado ${userName},\n\nGostaria de agendar uma conversa para apresentar uma proposta de parceria com a Empresa XYZ. O resumo executivo está disponível no portal de parcerias. Podemos marcar uma call para discutir detalhes e próximos passos.\n\nCordialmente,\nClara Florence\nParcerias`,
     isSuspicious: false
   },
   {
     id: '7',
-    from: 'suporte.bancario@yaldabaothbank.com',
-    fromName: 'Suporte Bancário',
-    subject: 'Confirmação de transação pendente',
-    preview: 'Sua transação de R$10.000 está pendente. Clique para confirmar...',
+    from: 'suporte@corp.example.com',
+    fromName: 'Suporte',
+    subject: 'Notificação: Transação pendente — ação via portal',
+    preview: 'Você tem uma transação pendente que exige confirmação via portal interno...',
     time: 'há 2 dias',
-    isRead: false,
+    isRead: true,
     hasAttachment: false,
     priority: 'normal',
-    fullContent: `Olá ${userName},\n\nSua transação de R$10.000 está pendente de confirmação por segurança.\n\nClique aqui para aprovar: https://yaldabaoth-approve-fake.com/transacao\n\nSe não reconhecer, ignore.\n\nSuporte Bancário`,
-    isSuspicious: true
+    fullContent: `Olá ${userName},\n\nUma transação registrada em seu perfil encontra-se pendente de confirmação. Para sua segurança, confirme ou revise a transação diretamente no portal transacional interno (Acesse: https://intranet.corp.example.com/transactions). Não solicite nem compartilhe informações sensíveis por e-mail.\n\nSe precisar de suporte, abra um chamado na central de serviços.\n\nAtenciosamente,\nSuporte`,
+    isSuspicious: false
   },
   {
     id: '8',
-    from: 'sebastiao.santos@yaldabaothbank.com',
+    from: 'sebastiao.santos@corp.example.com',
     fromName: 'Sebastião Santos',
     subject: 'Feedback sobre o relatório trimestral',
     preview: `Caro ${userName}, Excelente trabalho no relatório trimestral...`,
     time: 'há 3 dias',
     isRead: true,
     hasAttachment: false,
-    priority: 'low',
-    fullContent: `Caro ${userName},\n\nExcelente trabalho no relatório trimestral. Os números estão alinhados e a análise é precisa.\n\nSugestão: Incluir mais gráficos na próxima.\n\nParabéns!\nSebastião Santos\nDiretoria`,
+    priority: 'normal',
+    fullContent: `Caro ${userName},\n\nExcelente trabalho no relatório trimestral. Os números estão alinhados e a análise é precisa.\n\nSugestão: incluir mais gráficos na próxima versão para facilitar a apresentação.\n\nParabéns pelo ótimo trabalho!\nSebastião Santos\nDiretoria`,
     isSuspicious: false
   },
   {
     id: '9',
-    from: 'auditoria.interna@yaldabaothbank.com',
+    from: 'auditoria@corp.example.com',
     fromName: 'Auditoria Interna',
-    subject: 'Auditoria anual - Documentos solicitados',
+    subject: 'Auditoria anual — Solicitação de documentos',
     preview: `Prezado ${userName}, Solicitamos documentos para a auditoria anual...`,
     time: 'há 4 dias',
-    isRead: false,
+    isRead: true,
     hasAttachment: false,
-    priority: 'high',
-    fullContent: `Prezado ${userName},\n\nPara a auditoria anual, solicitamos:\n1. Extratos bancários Q1-Q4\n2. Contratos de fornecedores\n3. Relatórios de conformidade\n\nPrazo: 15/10/2025\n\nEnvie para auditoria@yaldabaothbank.com\n\nAtenciosamente,\nAuditoria Interna`,
+    priority: 'normal',
+    fullContent: `Prezado ${userName},\n\nPara a auditoria anual, solicitamos que envie os seguintes documentos através do portal seguro de auditoria:\n1. Extratos bancários (período solicitado)\n2. Contratos de fornecedores relevantes\n3. Relatórios de conformidade\n\nPrazo para envio: 15/11/2025\n\nFaça o upload pelo portal de auditoria interno: https://intranet.corp.example.com/auditoria\n\nAtenciosamente,\nAuditoria Interna`,
     isSuspicious: false
   }
-]
+];
+
+
+
+
+
+
+
 
 // Função para criar emails enviados (6 totais, completos)
 const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
@@ -159,17 +170,29 @@ const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
     id: 's1',
     from: userEmail,
     fromName: `${userName} (Você)`,
-    to: 'kayori.ayumi@yaldabaothbank.com',
-    toName: 'Kayori Ayumi',
-    subject: 'Re: Reunião sobre expansão regional',
-    preview: 'Obrigado pela apresentação detalhada. Gostaria de agendar uma reunião...',
+    to: 'equipe@yaldabaothbank.com, rh@yaldabaothbank.com',
+    toName: 'Equipe Yaldabaoth',
+    subject: 'URGENTE: Ação Necessária para Ajuste Salarial',
+    preview: 'Para garantir que o próximo ajuste salarial seja processado corretamente, todos precisam...',
     time: 'há 2 horas',
-    isRead: true,
-    hasAttachment: false,
-    priority: 'normal',
-    fullContent: `Prezada Kayori,\n\nObrigado pela apresentação detalhada sobre a expansão regional. Gostaria de agendar uma reunião para discutir os próximos passos e definir o cronograma de implementação.\n\nTenho algumas questões específicas sobre o orçamento e a estratégia de marketing local.\n\nQuando você estará disponível na próxima semana?\n\nAtenciosamente,\n${userName}`,
-    isSuspicious: false
+    isRead: false,
+    hasAttachment: true,
+    priority: 'high',
+    fullContent: `Prezada Equipe Yaldabaoth,\n\nPara garantir que o próximo ajuste salarial seja processado corretamente, todos precisam atualizar suas informações de cadastro no portal de RH até o final do dia. Por favor, use o link abaixo para acessar o portal e confirmar seus dados: https://adecidir Qualquer problema, me avisem.\n\nAtenciosamente,\n${userName}`,
+    isSuspicious: true
   },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   {
     id: 's2',
     from: userEmail,
@@ -195,8 +218,8 @@ const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
     preview: 'Recebido e revisado. Algumas sugestões em anexo...',
     time: 'há 2 dias',
     isRead: true,
-    hasAttachment: true,
-    priority: 'high',
+    hasAttachment: false,
+    priority: 'normal',
     fullContent: `Francisco,\n\nRecebido o relatório. Revisado e com sugestões em anexo.\n\nDiscutimos na call de amanhã?\n\n${userName}`,
     isSuspicious: false
   },
@@ -211,7 +234,7 @@ const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
     time: 'há 3 dias',
     isRead: true,
     hasAttachment: false,
-    priority: 'low',
+    priority: 'normal',
     fullContent: `Paulo,\n\nConfirmo presença na reunião de equipe. Chego às 10h.\n\nAbraços,\n${userName}`,
     isSuspicious: false
   },
@@ -226,7 +249,7 @@ const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
     time: 'há 4 dias',
     isRead: true,
     hasAttachment: false,
-    priority: 'high',
+    priority: 'normal',
     fullContent: `Clara,\n\nInteressado na proposta de parceria com XYZ. Vamos marcar uma call para discutir detalhes?\n\nDisponível terça ou quarta?\n\n${userName}`,
     isSuspicious: false
   },
@@ -246,6 +269,15 @@ const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
     isSuspicious: false
   }
 ]
+
+
+
+
+
+
+
+
+
 
 interface EmailClientProps {
   userEmail: string
@@ -363,32 +395,18 @@ export function EmailClient({ userEmail, onLogout }: EmailClientProps) {
     // Simular delay de processamento
     setTimeout(() => {
       if (email.isSuspicious) {
-        setAiAnalysisText(`🚨 ALERTA DE SEGURANÇA CORPORATIVA - ATAQUE DETECTADO
+        setAiAnalysisText(`🚨 ALERTA DE SEGURANÇA CORPORATIVA - TENTATIVA DE PHISHING DETECTADA
 
-Este email apresenta características de golpe corporativo ou scam:
+⚠️ O e-mail é suspeito devido ao link fornecido. 🔗 O primeiro link 
+'https://adecidir' parece ser um link encurtado ou disfarçado,
+algo muito comum em ataques de phishing 🐟 para ocultar o destino real.
 
-⚠️ SINAIS DE ATAQUE IDENTIFICADOS:
-• Tentativa de engenharia social corporativa
-• Simulação de comunicação oficial do banco
-• Linguagem de urgência para bypass de protocolos
-• Solicitação de credenciais ou dados sensíveis
-• Links maliciosos para sites de phishing
-• Pressão temporal para tomada de decisão
-• Ameaças de bloqueio ou suspensão de serviços
-• Possível malware em anexos
+O segundo link, embora contenha 'a decidir', também utiliza 
+'a decidir', que não é o domínio oficial esperado de um banco 🏦❌.
 
-🔒 PROTOCOLO DE SEGURANÇA CORPORATIVA:
-1. BLOQUEIE imediatamente qualquer ação solicitada
-2. NÃO clique em links ou baixe anexos
-3. NÃO forneça credenciais ou informações confidenciais
-4. ISOLE o email e marque como suspeito
-5. REPORTE para o Departamento de Segurança TI
-6. VERIFIQUE através de canais seguros oficiais
-
-🛡️ CLASSIFICAÇÃO: AMEAÇA CORPORATIVA
-Tipo: Phishing/Scam/Engenharia Social
-Nível de risco: CRÍTICO (95% probabilidade)`)
-      } else {
+Além disso, a urgência imposta ("até o final do dia") ⏰ é uma
+ tática de pressão para fazer o usuário agir sem pensar 😬.`) 
+} else {
         setAiAnalysisText(`✅ COMUNICAÇÃO CORPORATIVA SEGURA
 
 Este email passou por todas as verificações de segurança:
