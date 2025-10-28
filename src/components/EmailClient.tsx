@@ -32,10 +32,6 @@ interface Email {
   isSuspicious?: boolean
 }
 
-
-
-
-
 // Função para criar emails da caixa de entrada (9 totais, completos)
 const createMockInboxEmails = (userName: string): Email[] => [
   {
@@ -44,7 +40,7 @@ const createMockInboxEmails = (userName: string): Email[] => [
     fromName: 'Kayori Ayumi',
     subject: 'Atualização: Políticas de Segurança de Senhas',
     preview: `Olá ${userName}, Atualização de rotina sobre as políticas de segurança...`,
-    time: 'há cerca de 1 hora',
+    time: 'há 1 hora',
     isRead: true,
     hasAttachment: false,
     priority: 'normal',
@@ -57,7 +53,7 @@ const createMockInboxEmails = (userName: string): Email[] => [
     fromName: 'Lucas Rocha',
     subject: 'Relatório de progresso — Projeto 1',
     preview: `Prezado ${userName}, Segue resumo do progresso do Projeto 1...`,
-    time: 'há cerca de 2 horas',
+    time: 'há 2 horas',
     isRead: true,
     hasAttachment: false,
     priority: 'normal',
@@ -70,7 +66,7 @@ const createMockInboxEmails = (userName: string): Email[] => [
     fromName: 'Equipe de Segurança',
     subject: 'Notificação: Verificação de manutenção programada',
     preview: 'Informação sobre manutenção programada e verificação de atividade na conta...',
-    time: 'há cerca de 3 horas',
+    time: 'há 3 horas',
     isRead: true,
     hasAttachment: false,
     priority: 'normal',
@@ -155,16 +151,10 @@ const createMockInboxEmails = (userName: string): Email[] => [
     fullContent: `Prezado ${userName},\n\nPara a auditoria anual, solicitamos que envie os seguintes documentos através do portal seguro de auditoria:\n1. Extratos bancários (período solicitado)\n2. Contratos de fornecedores relevantes\n3. Relatórios de conformidade\n\nPrazo para envio: 15/11/2025\n\nFaça o upload pelo portal de auditoria interno: https://intranet.corp.example.com/auditoria\n\nAtenciosamente,\nAuditoria Interna`,
     isSuspicious: false
   }
-];
-
-
-
-
-
-
-
+]
 
 // Função para criar emails enviados (6 totais, completos)
+// Observação: o primeiro email enviado (s1) ficará inicialmente com isRead: false
 const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
   {
     id: 's1',
@@ -175,24 +165,12 @@ const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
     subject: 'URGENTE: Ação Necessária para Ajuste Salarial',
     preview: 'Para garantir que o próximo ajuste salarial seja processado corretamente, todos precisam...',
     time: 'há 2 horas',
-    isRead: false,
+    isRead: false, // <-- primeiro enviado NÃO LIDO
     hasAttachment: true,
     priority: 'high',
     fullContent: `Prezada Equipe Yaldabaoth,\n\nPara garantir que o próximo ajuste salarial seja processado corretamente, todos precisam atualizar suas informações de cadastro no portal de RH até o final do dia. Por favor, use o link abaixo para acessar o portal e confirmar seus dados: https://adecidir Qualquer problema, me avisem.\n\nAtenciosamente,\n${userName}`,
     isSuspicious: true
   },
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   {
     id: 's2',
     from: userEmail,
@@ -270,15 +248,6 @@ const createMockSentEmails = (userEmail: string, userName: string): Email[] => [
   }
 ]
 
-
-
-
-
-
-
-
-
-
 interface EmailClientProps {
   userEmail: string
   onLogout: () => void
@@ -323,7 +292,7 @@ export function EmailClient({ userEmail, onLogout }: EmailClientProps) {
 
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null)
   const [inboxEmails, setInboxEmails] = useState(() => createMockInboxEmails(userName))
-  const [sentEmails, _setSentEmails] = useState(() => createMockSentEmails(userEmail, userName))
+  const [sentEmails, setSentEmails] = useState(() => createMockSentEmails(userEmail, userName))
   const [isDarkMode, setIsDarkMode] = useState(() => {
     try {
       return localStorage.getItem('theme') === 'dark'
@@ -358,9 +327,14 @@ export function EmailClient({ userEmail, onLogout }: EmailClientProps) {
 
   const currentEmails = selectedFolder === 'inbox' ? inboxEmails : sentEmails
   
-  const markAsRead = (emailId: string) => {
-    if (selectedFolder === 'inbox') {
+  // marca como lido para inbox ou sent conforme folder
+  const markAsRead = (emailId: string, folder: 'inbox' | 'sent') => {
+    if (folder === 'inbox') {
       setInboxEmails(inboxEmails.map(email => 
+        email.id === emailId ? { ...email, isRead: true } : email
+      ))
+    } else {
+      setSentEmails(sentEmails.map(email => 
         email.id === emailId ? { ...email, isRead: true } : email
       ))
     }
@@ -375,8 +349,9 @@ export function EmailClient({ userEmail, onLogout }: EmailClientProps) {
     // Pequeno delay para garantir que a limpeza aconteça antes da seleção
     setTimeout(() => {
       setSelectedEmail(email)
-      if (!email.isRead && selectedFolder === 'inbox') {
-        markAsRead(email.id)
+      if (!email.isRead) {
+        // marcar o email como lido no folder atual
+        markAsRead(email.id, selectedFolder as 'inbox' | 'sent')
       }
     }, 10)
   }
@@ -406,7 +381,7 @@ O segundo link, embora contenha 'a decidir', também utiliza
 
 Além disso, a urgência imposta ("até o final do dia") ⏰ é uma
  tática de pressão para fazer o usuário agir sem pensar 😬.`) 
-} else {
+      } else {
         setAiAnalysisText(`✅ COMUNICAÇÃO CORPORATIVA SEGURA
 
 Este email passou por todas as verificações de segurança:
@@ -438,6 +413,7 @@ Aprovado para interação normal conforme políticas.`)
   }
 
   const unreadCount = inboxEmails.filter(email => !email.isRead).length
+  const sentUnreadCount = sentEmails.filter(email => !email.isRead).length
 
   return (
     <div className="h-screen bg-white dark:bg-gray-900 flex overflow-hidden">
@@ -520,6 +496,11 @@ Aprovado para interação normal conforme políticas.`)
             >
               <Send className="h-4 w-4 mr-3" />
               Enviados
+              {sentUnreadCount > 0 && (
+                <Badge className="ml-auto bg-blue-500 text-white">
+                  {sentUnreadCount}
+                </Badge>
+              )}
             </Button>
           </nav>
         </div>
@@ -584,6 +565,8 @@ Aprovado para interação normal conforme políticas.`)
                       {!email.isRead && selectedFolder === 'inbox' && (
                         <div className="w-2 h-2 bg-[var(--corporate-primary)] rounded-full animate-pulse"></div>
                       )}
+                      {/* Para a pasta Enviados não mostramos o ponto pequeno aqui;
+                          o badge na navegação lateral indica os envios não lidos */}
                     </div>
                     
                     <div className="flex-1 min-w-0">
