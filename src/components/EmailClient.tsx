@@ -38,7 +38,7 @@ const createMockInboxEmails = (userName: string): Email[] => [
     id: '1',
     from: 'kayori.ayumi@corp.example.com',
     fromName: 'Kayori Ayumi',
-    subject: 'Atualização: Políticas de Segurança de Senhas',
+    subject: 'YaldabaothHack(ProtejaSuasSenhas) - Atualização: Políticas de Segurança de Senhas',
     preview: `Olá ${userName}, Atualização de rotina sobre as políticas de segurança...`,
     time: 'há 1 hora',
     isRead: true,
